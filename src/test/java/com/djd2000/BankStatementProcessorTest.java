@@ -3,7 +3,6 @@ package com.djd2000;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,23 +22,29 @@ public class BankStatementProcessorTest {
 		
 	}
 
-	@Test
-	public void testCalculateTotalAmount() {
-		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
-		assertEquals(5700d, processor.calculateTotalAmount(),0);
-		
-	}
+//	@Test
+//	public void testCalculateTotalAmount() {
+//		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
+//		assertEquals(5700d, processor.summarizeTransactions(),0);
+//		
+//	}
 
-	@Test
-	public void testSelectInMonth() {
-		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
-		assertEquals(2, processor.selectInMonth(Month.JANUARY).size());
-	}
+//	@Test
+//	public void testSelectInMonth() {
+//		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
+//		assertEquals(2, processor.findTransactionsInMonth(Month.JANUARY).size());
+//	}
 
 	@Test
 	public void testCalculateTotalForCategory() {
-		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
+		BankTransactionProcessor processor = new BankTransactionProcessor(bankTransactions);
 		assertEquals(6000d, processor.calculateTotalForCategory("Salary"),0);
 	}
+	
+//	@Test
+//	public void testGetFilteredTransactionList() {
+//		BankStatementProcessor processor = new BankStatementProcessor(bankTransactions);
+//		List<BankTransaction> transactions = processor.filterTransactions(Predicate<BankTransaction> p);
+//	}
 
 }

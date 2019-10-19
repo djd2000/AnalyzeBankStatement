@@ -13,7 +13,11 @@ public class MainApplication {
 
 		BankStatementAnalyzer bankStatementAnalyzer = new BankStatementAnalyzer();
 
-		bankStatementAnalyzer.analyze(statementPath, bankStatementParser);
+		try {
+			bankStatementAnalyzer.analyze(statementPath, bankStatementParser);
+		} catch (Exception e) {
+			System.out.println("unable to process transaction\n " + e);
+		}
 
 	}
 }

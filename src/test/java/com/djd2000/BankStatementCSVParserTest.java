@@ -18,7 +18,13 @@ public class BankStatementCSVParserTest {
 
 		String line = "30-01-2017,-50,Tesco";
 
-		BankTransaction result = statementParser.parseFrom(line);
+		BankTransaction result = null;
+		try {
+			result = statementParser.parseFrom(line);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		BankTransaction expected = new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -50d, "Tesco");
 
@@ -33,7 +39,12 @@ public class BankStatementCSVParserTest {
 		
 		List<String> lines = Arrays.asList("30-01-2017,-50,Tesco","10-02-2017,-90,Deliveroo");
 		
-		List<BankTransaction> result = statementParser.parseLinesFrom(lines);
+		List<BankTransaction> result = null;
+		try {
+			result = statementParser.parseLinesFrom(lines);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals(2, result.size());
 		
