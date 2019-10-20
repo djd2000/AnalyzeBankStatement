@@ -16,16 +16,18 @@ public class BankStatementCSVParser implements BankStatementParser {
 		if (columns.length < EXPECTED_COLUMN_COUNT) {
 			throw new CSVSyntaxException("CSV issue");
 		}
+
+		Notification notification;
+		BankTransactionValidator validator = new BankTransactionValidator(columns[2], columns[0], columns[1]);
+		if ((notification = validator.validate()).hasErrors()) {
+			throw new IllegalArgumentException(notification.errorMessage());
+		}
+
 		LocalDate date;
 		double amount;
-		try {
-			date = LocalDate.parse(columns[0], DATE_PATTERN);
-			amount = Double.parseDouble(columns[1]);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			throw new Exception("Invalid input data " + e.getMessage());
-//			throw e;
-		}
+
+		date = LocalDate.parse(columns[0], DATE_PATTERN);
+		amount = Double.parseDouble(columns[1]);
 
 		String description = columns[2];
 
